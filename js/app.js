@@ -89,15 +89,11 @@ deck.addEventListener('click', function(e) {
   const t = e.target;
   console.log(t.nodeName);
   if (t.nodeName === 'LI') {
-    turnCard(t);
-  }
-  // Turn card even if symbol is clicked
-  if (t.nodeName === 'I') {
-    turnCard(t.parentNode);
+    displayCard(t);
   }
 })
 
-function turnCard(card) {
-  card.classList.toggle('open');
-  card.classList.toggle('show');
+function displayCard(card) {
+  card.classList.add('open');
+  card.classList.add('show');
 }
