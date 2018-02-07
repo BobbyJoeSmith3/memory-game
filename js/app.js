@@ -30,14 +30,18 @@ const deck = document.querySelector('.deck');
  */
 function dealCards() {
     shuffle(cards);
-    while(deck.firstChild) {
-      // The list is live so it will re-index each call
-      deck.removeChild(deck.firstChild);
-    }
+    clearCards();
     cards.forEach(function(element) {
       fragment.appendChild(fragmentFromString(element));
     });
     deck.appendChild(fragment);
+}
+
+function clearCards() {
+  while(deck.firstChild) {
+    // The list is live so it will re-index each call
+    deck.removeChild(deck.firstChild);
+  }
 }
 
 /*
