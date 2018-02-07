@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
- const deck = {
+ const deck = [
    '<li class="card"><i class="fa fa-diamond"></i></li>',
    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
    '<li class="card"><i class="fa fa-anchor"></i></li>',
@@ -18,7 +18,7 @@
    '<li class="card"><i class="fa fa-bicycle"></i></li>',
    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
    '<li class="card"><i class="fa fa-cube"></i></li>'
- };
+ ];
 
 
 /*
