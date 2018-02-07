@@ -46,6 +46,7 @@ function clearCards() {
 
 /*
 Turns the array of cards written as strings into elements that can be appended to DocumentFragment in dealCards(). DocumentFragment does not take the method insertInnerHTML() like an actual element would, which would have converted the html code in string format into actual Nodes.
+SOURCE: https://stackoverflow.com/questions/9284117/inserting-arbitrary-html-into-a-documentfragment
 */
 function fragmentFromString(strHTML) {
   // template tag holds HTML code without displaying to client
@@ -54,7 +55,7 @@ function fragmentFromString(strHTML) {
   return temp.content;
 }
 
-dealCards();
+//dealCards();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 // Description of Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/
@@ -83,3 +84,20 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+deck.addEventListener('click', function(e) {
+  const t = e.target;
+  console.log(t.nodeName);
+  if (t.nodeName === 'LI') {
+    turnCard(t);
+  }
+  // Turn card even if symbol is clicked
+  if (t.nodeName === 'I') {
+    turnCard(t.parentNode);
+  }
+})
+
+function turnCard(card) {
+  card.classList.toggle('open');
+  card.classList.toggle('show');
+}
