@@ -1,25 +1,26 @@
 /*
  * Create a list that holds all of your cards
  */
- const deck = [
-   '<li class="card"><i class="fa fa-diamond"></i></li>',
-   '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
-   '<li class="card"><i class="fa fa-anchor"></i></li>',
-   '<li class="card"><i class="fa fa-bolt"></i></li>',
-   '<li class="card"><i class="fa fa-cube"></i></li>',
-   '<li class="card"><i class="fa fa-anchor"></i></li>',
-   '<li class="card"><i class="fa fa-leaf"></i></li>',
-   '<li class="card"><i class="fa fa-bicycle"></i></li>',
-   '<li class="card"><i class="fa fa-diamond"></i></li>',
-   '<li class="card"><i class="fa fa-bomb"></i></li>',
-   '<li class="card"><i class="fa fa-leaf"></i></li>',
-   '<li class="card"><i class="fa fa-bomb"></i></li>',
-   '<li class="card"><i class="fa fa-bolt"></i></li>',
-   '<li class="card"><i class="fa fa-bicycle"></i></li>',
-   '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
-   '<li class="card"><i class="fa fa-cube"></i></li>'
+const cards = [
+    '<li class="card"><i class="fa fa-diamond"></i></li>',
+    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
+    '<li class="card"><i class="fa fa-anchor"></i></li>',
+    '<li class="card"><i class="fa fa-bolt"></i></li>',
+    '<li class="card"><i class="fa fa-cube"></i></li>',
+    '<li class="card"><i class="fa fa-anchor"></i></li>',
+    '<li class="card"><i class="fa fa-leaf"></i></li>',
+    '<li class="card"><i class="fa fa-bicycle"></i></li>',
+    '<li class="card"><i class="fa fa-diamond"></i></li>',
+    '<li class="card"><i class="fa fa-bomb"></i></li>',
+    '<li class="card"><i class="fa fa-leaf"></i></li>',
+    '<li class="card"><i class="fa fa-bomb"></i></li>',
+    '<li class="card"><i class="fa fa-bolt"></i></li>',
+    '<li class="card"><i class="fa fa-bicycle"></i></li>',
+    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
+    '<li class="card"><i class="fa fa-cube"></i></li>'
  ];
-
+const fragment = document.createDocumentFragment();
+const deck = document.querySelector('.deck');
 
 /*
  * Display the cards on the page
@@ -27,6 +28,29 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+function dealCards() {
+    shuffle(cards);
+    while(deck.firstChild) {
+      // The list is live so it will re-index each call
+      deck.removeChild(deck.firstChild);
+    }
+    cards.forEach(function(element) {
+      fragment.appendChild(fragmentFromString(element));
+    });
+    deck.appendChild(fragment);
+}
+
+/*
+Turns the array of cards written as strings into elements that can be appended to DocumentFragment in dealCards(). DocumentFragment does not take the method insertInnerHTML() like an actual element would, which would have converted the html code in string format into actual Nodes.
+*/
+function fragmentFromString(strHTML) {
+  // template tag holds HTML code without displaying to client
+  let temp = document.createElement('template');
+  temp.innerHTML = strHTML;
+  return temp.content;
+}
+
+dealCards();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 // Description of Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/
