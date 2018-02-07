@@ -11,6 +11,7 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+// Description of Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
