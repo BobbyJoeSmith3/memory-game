@@ -21,7 +21,9 @@ const cards = [
  ];
 const fragment = document.createDocumentFragment();
 const deck = document.querySelector('.deck');
+const moves = document.querySelector('.moves');
 const turnedCards = [];
+let numberOfMoves = 0;
 
 /*
  * Display the cards on the page
@@ -115,7 +117,17 @@ function checkForMatch(card) {
       hideCard(turnedCards[1]);
     }
     turnedCards.splice(0);
+    incrementCounter();
   }
+}
+
+function setCounter() {
+  moves.textContent = numberOfMoves;
+}
+
+function incrementCounter() {
+  numberOfMoves++;
+  setCounter();
 }
 
 deck.addEventListener('click', function(e) {
