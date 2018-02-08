@@ -119,7 +119,6 @@ function clearMatchQueue(array) {
 function checkForMatch(card) {
   if (turnedCards.length < 3) {
     turnedCards.push(card);
-    console.log(turnedCards.length);
   }
   if (turnedCards.length > 1) {
     if (turnedCards[0].isEqualNode(turnedCards[1])) {
@@ -150,7 +149,6 @@ function incrementCounter() {
 
 deck.addEventListener('click', function(e) {
   const t = e.target;
-  console.log(t.nodeName);
   if (t.nodeName === 'LI') {
     displayCard(t);
     checkForMatch(t);
