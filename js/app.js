@@ -21,6 +21,7 @@ const cards = [
  ];
 const fragment = document.createDocumentFragment();
 const deck = document.querySelector('.deck');
+const turnedCards = [];
 
 /*
  * Display the cards on the page
@@ -90,10 +91,25 @@ deck.addEventListener('click', function(e) {
   console.log(t.nodeName);
   if (t.nodeName === 'LI') {
     displayCard(t);
+    checkForMatch(t);
   }
 })
 
 function displayCard(card) {
   card.classList.add('open');
   card.classList.add('show');
+}
+
+function checkForMatch(card) {
+  if (turnedCards.length < 3) {
+    turnedCards.push(card);
+    console.log(turnedCards.length);
+  }
+  if (turnedCards.length > 1) {
+    console.log("checking equality");
+    console.log(turnedCards[0].isEqualNode(turnedCards[1]));
+  }
+  // turnedCards.forEach(function(c) {
+  //   console.log(c.childNodes);
+  // });
 }
