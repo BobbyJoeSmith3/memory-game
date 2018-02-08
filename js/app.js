@@ -1,6 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
+window.onload = function() {
+  reset();
+}
 const cards = [
     '<li class="card"><i class="fa fa-diamond"></i></li>',
     '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
@@ -24,6 +27,11 @@ const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
 const turnedCards = [];
 let numberOfMoves = 0;
+
+function reset() {
+  dealCards();
+  resetCounter();
+}
 
 /*
  * Display the cards on the page
@@ -103,6 +111,10 @@ function leaveOpen(card) {
   card.classList.remove('show');
 }
 
+function clearMatchQueue(array) {
+  array.splice(0);
+}
+
 function checkForMatch(card) {
   if (turnedCards.length < 3) {
     turnedCards.push(card);
@@ -116,13 +128,18 @@ function checkForMatch(card) {
       hideCard(turnedCards[0]);
       hideCard(turnedCards[1]);
     }
-    turnedCards.splice(0);
+    clearMatchQueue(turnedCards);
     incrementCounter();
   }
 }
 
 function setCounter() {
   moves.textContent = numberOfMoves;
+}
+
+function resetCounter() {
+  numberOfMoves = 0;
+  setCounter();
 }
 
 function incrementCounter() {
