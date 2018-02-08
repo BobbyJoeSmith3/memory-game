@@ -102,8 +102,11 @@ function displayCard(card) {
 }
 
 function hideCard(card) {
-  card.classList.remove('open');
-  card.classList.remove('show');
+  setTimeout(function() {
+    card.classList.remove('open');
+    card.classList.remove('show');
+  }, 350);
+
 }
 
 function leaveOpen(card) {
@@ -125,8 +128,8 @@ function checkForMatch(card) {
       leaveOpen(turnedCards[0]);
       leaveOpen(turnedCards[1]);
     } else {
-      hideCard(turnedCards[0]);
-      hideCard(turnedCards[1]);
+        hideCard(turnedCards[0]);
+        hideCard(turnedCards[1]);
     }
     clearMatchQueue(turnedCards);
     incrementCounter();
