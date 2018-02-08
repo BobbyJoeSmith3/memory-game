@@ -85,6 +85,38 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function displayCard(card) {
+ card.classList.add('open');
+ card.classList.add('show');
+}
+
+function hideCard(card) {
+ card.classList.remove('open');
+ card.classList.remove('show');
+}
+
+function leaveOpen(card) {
+ card.classList.add('match');
+ card.classList.remove('open');
+ card.classList.remove('show');
+}
+
+function checkForMatch(card) {
+ if (turnedCards.length < 3) {
+   turnedCards.push(card);
+   console.log(turnedCards.length);
+ }
+ if (turnedCards.length > 1) {
+   if (turnedCards[0].isEqualNode(turnedCards[1])) {
+     leaveOpen(turnedCards[0]);
+     leaveOpen(turnedCards[1]);
+   } else {
+     hideCard(turnedCards[0]);
+     hideCard(turnedCards[1]);
+   }
+   turnedCards.splice(0);
+ }
+}
 
 deck.addEventListener('click', function(e) {
   const t = e.target;
@@ -94,36 +126,3 @@ deck.addEventListener('click', function(e) {
     checkForMatch(t);
   }
 })
-
-function displayCard(card) {
-  card.classList.add('open');
-  card.classList.add('show');
-}
-
-function hideCard(card) {
-  card.classList.remove('open');
-  card.classList.remove('show');
-}
-
-function leaveOpen(card) {
-  card.classList.add('match');
-  card.classList.remove('open');
-  card.classList.remove('show');
-}
-
-function checkForMatch(card) {
-  if (turnedCards.length < 3) {
-    turnedCards.push(card);
-    console.log(turnedCards.length);
-  }
-  if (turnedCards.length > 1) {
-    if (turnedCards[0].isEqualNode(turnedCards[1])) {
-      leaveOpen(turnedCards[0]);
-      leaveOpen(turnedCards[1]);
-    } else {
-      hideCard(turnedCards[0]);
-      hideCard(turnedCards[1]);
-    }
-    turnedCards.splice(0);
-  }
-}
