@@ -25,6 +25,7 @@ const cards = [
 const fragment = document.createDocumentFragment();
 const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
+const restart = document.querySelector('.restart');
 const turnedCards = [];
 let numberOfMoves = 0;
 
@@ -155,3 +156,7 @@ deck.addEventListener('click', function(e) {
     checkForMatch(t);
   }
 })
+
+restart.addEventListener('click', function() {
+  reset();
+});
