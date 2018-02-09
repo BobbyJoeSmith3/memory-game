@@ -107,3 +107,39 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0,0,0); /* fallback color */
+  background: linear-gradient(160deg, rgba(69, 255, 212, 0.4) 0%, rgba(168, 122, 204, 0.4) 100%);
+}
+
+.modal-content {
+  background: #ffffff url('../img/geometry2.png');
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60vw;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #02b3e4;
+  text-decoration: none;
+  cursor: pointer;
+}

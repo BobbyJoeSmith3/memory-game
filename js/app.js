@@ -1,6 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
+
+ /*
+  TODO: create game end message with final score and button to restart game
+  TODO: make sure selecting the same card twice wont cause it to think it matched
+ */
 window.onload = function() {
   reset();
 }
@@ -26,8 +31,11 @@ const fragment = document.createDocumentFragment();
 const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
+const modal = document.querySelector('.modal');
+const closeModal = document.querySelector('.close');
 const turnedCards = [];
 let numberOfMoves = 0;
+let numberOfMatches = 0;
 
 function reset() {
   dealCards();
@@ -127,6 +135,10 @@ function checkForMatch(card) {
     if (turnedCards[0].isEqualNode(turnedCards[1])) {
       leaveOpen(turnedCards[0]);
       leaveOpen(turnedCards[1]);
+      numberOfMatches++;
+      if (checkGameOver()) {
+        gameOver();
+      };
     } else {
         hideCard(turnedCards[0]);
         hideCard(turnedCards[1]);
@@ -150,6 +162,14 @@ function incrementCounter() {
   setCounter();
 }
 
+function checkGameOver() {
+  return numberOfMatches === 8;
+}
+
+function gameOver() {
+  modal.style.display = "block";
+}
+
 deck.addEventListener('click', function(e) {
   const t = e.target;
   if (t.nodeName === 'LI') {
@@ -161,3 +181,13 @@ deck.addEventListener('click', function(e) {
 restart.addEventListener('click', function() {
   reset();
 });
+
+closeModal.addEventListener('click', function() {
+  modal.style.display = "none";
+})
+
+window.addEventListener('click', function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+})
