@@ -32,7 +32,7 @@ const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('.close');
+const modalCloseButton = document.querySelector('.close');
 const endGameMessage = document.querySelector('.end-game-message');
 const turnedCards = [];
 let numberOfMoves = 0;
@@ -40,7 +40,7 @@ let numberOfMatches = 0;
 
 function reset() {
   dealCards();
-  resetCounter();
+  resetCounters();
 }
 
 /*
@@ -153,8 +153,9 @@ function setCounter() {
   moves.textContent = numberOfMoves;
 }
 
-function resetCounter() {
+function resetCounters() {
   numberOfMoves = 0;
+  numberOfMatches = 0;
   setCounter();
 }
 
@@ -172,9 +173,22 @@ function gameOver() {
   endGameMessage.textContent = "It took you " + numberOfMoves + " moves to match all of the cards.";
 }
 
+function closeModal() {
+  modal.style.display = "none";
+}
+
+function openCard(card) {
+  // Check if card is already displayed
+  if ((card.className ===  'card open show') || (card.className === 'card match')) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 deck.addEventListener('click', function(e) {
   const t = e.target;
-  if (t.nodeName === 'LI') {
+  if ((t.nodeName === 'LI') && (openCard(t) === false)) {
     displayCard(t);
     checkForMatch(t);
   }
@@ -184,12 +198,12 @@ restart.addEventListener('click', function() {
   reset();
 });
 
-closeModal.addEventListener('click', function() {
-  modal.style.display = "none";
-})
+modalCloseButton.addEventListener('click', function() {
+  closeModal();
+});
 
 window.addEventListener('click', function(event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    closeModal();
   }
-})
+});
