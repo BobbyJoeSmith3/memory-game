@@ -33,6 +33,7 @@ const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const modal = document.querySelector('.modal');
 const closeModal = document.querySelector('.close');
+const endGameMessage = document.querySelector('.end-game-message');
 const turnedCards = [];
 let numberOfMoves = 0;
 let numberOfMatches = 0;
@@ -168,6 +169,7 @@ function checkGameOver() {
 
 function gameOver() {
   modal.style.display = "block";
+  endGameMessage.textContent = "It took you " + numberOfMoves + " moves to match all of the cards.";
 }
 
 deck.addEventListener('click', function(e) {
