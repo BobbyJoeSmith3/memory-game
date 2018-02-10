@@ -30,6 +30,7 @@ const cards = [
 const fragment = document.createDocumentFragment();
 const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
+const timer = document.querySelector('.timer');
 const restart = document.querySelector('.restart');
 const modal = document.querySelector('.modal');
 const modalCloseButton = document.querySelector('.close');
@@ -38,10 +39,16 @@ const endGameMessage = document.querySelector('.end-game-message');
 const turnedCards = [];
 let numberOfMoves = 0;
 let numberOfMatches = 0;
+let startTime = new Date().getTime();
+let currentTime;
+let endTime;
+let elapsed;
+let startTimer;
 
 function reset() {
   dealCards();
   resetCounters();
+  resetTimer();
 }
 
 /*
@@ -139,6 +146,7 @@ function checkForMatch(card) {
       leaveOpen(turnedCards[1]);
       numberOfMatches++;
       if (checkGameOver()) {
+        stopTimer();
         gameOver();
       };
     } else {
@@ -158,6 +166,8 @@ function resetCounters() {
   numberOfMoves = 0;
   numberOfMatches = 0;
   setCounter();
+  elapsed = 0;
+  startTime = new Date().getTime();
 }
 
 function incrementCounter() {
@@ -171,7 +181,7 @@ function checkGameOver() {
 
 function gameOver() {
   modal.style.display = "block";
-  endGameMessage.textContent = "It took you " + numberOfMoves + " moves to match all of the cards.";
+  endGameMessage.textContent = "It took you " + numberOfMoves + " moves to match all of the cards, and " + endTime + " seconds.";
 }
 
 function closeModal() {
@@ -190,6 +200,26 @@ function openCard(card) {
 function restartFromModal() {
   closeModal();
   reset();
+}
+
+function stopTimer() {
+  window.clearInterval(startTimer);
+  endTime = elapsed;
+}
+
+function resetTimer() {
+  // Must call everytime a new startTimer is created
+  stopTimer();
+  /* Needed to assign startTimer function to a variable to use clearInterval in stopTimer function. Needed to embed the startTimer function in another in resetTimer/reset to trigger the start of the interval */
+  startTimer = window.setInterval(function() {
+    currentTime = new Date().getTime() - startTime;
+    elapsed = Math.floor(currentTime/100)/10;
+    if (Math.round(elapsed) == elapsed) {
+      elapsed += '.0';
+    }
+    // console.log(elapsed);
+    timer.textContent = elapsed;
+  }, 100);
 }
 
 deck.addEventListener('click', function(e) {
