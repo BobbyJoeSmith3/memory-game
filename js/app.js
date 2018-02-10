@@ -33,6 +33,7 @@ const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 const modal = document.querySelector('.modal');
 const modalCloseButton = document.querySelector('.close');
+const modalResetButton = document.querySelector('.playAgain');
 const endGameMessage = document.querySelector('.end-game-message');
 const turnedCards = [];
 let numberOfMoves = 0;
@@ -186,13 +187,18 @@ function openCard(card) {
   }
 }
 
+function restartFromModal() {
+  closeModal();
+  reset();
+}
+
 deck.addEventListener('click', function(e) {
   const t = e.target;
   if ((t.nodeName === 'LI') && (openCard(t) === false)) {
     displayCard(t);
     checkForMatch(t);
   }
-})
+});
 
 restart.addEventListener('click', function() {
   reset();
@@ -200,6 +206,10 @@ restart.addEventListener('click', function() {
 
 modalCloseButton.addEventListener('click', function() {
   closeModal();
+});
+
+modalResetButton.addEventListener('click', function() {
+  restartFromModal();
 });
 
 window.addEventListener('click', function(event) {
