@@ -80,8 +80,6 @@ function fragmentFromString(strHTML) {
   return temp.content;
 }
 
-//dealCards();
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 // Description of Fisher-Yates shuffle https://bost.ocks.org/mike/shuffle/
 function shuffle(array) {
