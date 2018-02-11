@@ -2,10 +2,6 @@
  * Create a list that holds all of your cards
  */
 
- /*
-  TODO: create game end message with final score and button to restart game
-  TODO: make sure selecting the same card twice wont cause it to think it matched
- */
 window.onload = function() {
   reset();
 }
@@ -155,6 +151,7 @@ function checkForMatch(card) {
     }
     clearMatchQueue(turnedCards);
     incrementCounter();
+    starRating();
   }
 }
 
@@ -166,6 +163,7 @@ function resetCounters() {
   numberOfMoves = 0;
   numberOfMatches = 0;
   setCounter();
+  starRating();
   elapsed = 0;
   startTime = new Date().getTime();
 }
@@ -220,6 +218,22 @@ function resetTimer() {
     // console.log(elapsed);
     timer.textContent = elapsed;
   }, 100);
+}
+
+function starRating(){
+  let stars = document.querySelectorAll('.stars');
+  if (numberOfMoves === 0) {
+    stars[0].innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+    stars[1].innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+  }
+  if (numberOfMoves === 15) {
+    stars[0].innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+    stars[1].innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+  }
+  if (numberOfMoves === 22) {
+    stars[0].innerHTML = '<li><i class="fa fa-star"></i>';
+    stars[1].innerHTML = '<li><i class="fa fa-star"></i>';
+  }
 }
 
 deck.addEventListener('click', function(e) {
