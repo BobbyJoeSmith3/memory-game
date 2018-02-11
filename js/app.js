@@ -141,7 +141,9 @@ function checkForMatch(card) {
       numberOfMatches++;
       if (checkGameOver()) {
         stopTimer();
+        incrementCounter();
         gameOver();
+        return;
       };
     } else {
         hideCard(turnedCards[0]);
