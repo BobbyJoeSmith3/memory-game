@@ -35,7 +35,7 @@ const endGameMessage = document.querySelector('.end-game-message');
 const turnedCards = [];
 let numberOfMoves = 0;
 let numberOfMatches = 0;
-let startTime = new Date().getTime();
+let startTime;
 let currentTime;
 let endTime;
 let elapsed;
@@ -44,7 +44,6 @@ let startTimer;
 function reset() {
   dealCards();
   resetCounters();
-  resetTimer();
 }
 
 /*
@@ -92,7 +91,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
@@ -131,6 +129,12 @@ function clearMatchQueue(array) {
 }
 
 function checkForMatch(card) {
+  if ((turnedCards.length === 0) && (numberOfMoves === 0)) {
+    console.log("number of turned cards: " + turnedCards.length)
+    console.log("number of moves: " + numberOfMoves);
+    startTime = new Date().getTime();
+    resetTimer();
+  }
   if (turnedCards.length < 3) {
     turnedCards.push(card);
   }
@@ -142,6 +146,8 @@ function checkForMatch(card) {
       if (checkGameOver()) {
         stopTimer();
         incrementCounter();
+        starRating();
+        //clearMatchQueue(turnedCards);
         gameOver();
         return;
       };
@@ -164,8 +170,9 @@ function resetCounters() {
   numberOfMatches = 0;
   setCounter();
   starRating();
+  clearMatchQueue(turnedCards);
   elapsed = 0;
-  startTime = new Date().getTime();
+  displayTimer();
 }
 
 function incrementCounter() {
@@ -215,9 +222,12 @@ function resetTimer() {
     if (Math.round(elapsed) == elapsed) {
       elapsed += '.0';
     }
-    // console.log(elapsed);
-    timer.textContent = elapsed;
+    displayTimer();
   }, 100);
+}
+
+function displayTimer() {
+  timer.textContent = elapsed;
 }
 
 function starRating(){
@@ -238,6 +248,7 @@ function starRating(){
 
 deck.addEventListener('click', function(e) {
   const t = e.target;
+  // only turn card and count as move if a card is clicked and it hasn't already been turned over
   if ((t.nodeName === 'LI') && (openCard(t) === false)) {
     displayCard(t);
     checkForMatch(t);
