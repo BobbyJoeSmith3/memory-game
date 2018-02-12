@@ -4,7 +4,8 @@
 
 window.onload = function() {
   reset();
-}
+};
+
 const cards = [
     '<li class="card"><i class="fa fa-diamond"></i></li>',
     '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
@@ -130,8 +131,6 @@ function clearMatchQueue(array) {
 
 function checkForMatch(card) {
   if ((turnedCards.length === 0) && (numberOfMoves === 0)) {
-    console.log("number of turned cards: " + turnedCards.length)
-    console.log("number of moves: " + numberOfMoves);
     startTime = new Date().getTime();
     resetTimer();
   }
@@ -150,7 +149,7 @@ function checkForMatch(card) {
         //clearMatchQueue(turnedCards);
         gameOver();
         return;
-      };
+      }
     } else {
         hideCard(turnedCards[0]);
         hideCard(turnedCards[1]);
@@ -171,6 +170,7 @@ function resetCounters() {
   setCounter();
   starRating();
   clearMatchQueue(turnedCards);
+  stopTimer();
   elapsed = 0;
   displayTimer();
 }
