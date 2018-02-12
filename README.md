@@ -5,6 +5,7 @@
 
 * [Description](#description)
 * [Objectives](#objectives)
+* [Dependencies](#dependencies)
 * [Contributions](#contributions)
 
 
@@ -22,6 +23,10 @@ A simple game of memory. Find matching pairs of cards by flipping them over. If 
 + Game displays the current number of moves a user has made.
 + Code is formatted with consistent, logical, and easy-to-read formatting as described in the [Udacity JavaScript Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
 + Utilize performant javascript code.
+
+## Dependencies
+None. Just download the code and open index.html in your preferred browser.
+
 
 ## Contributions
 
